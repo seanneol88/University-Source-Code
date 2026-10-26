@@ -1,26 +1,33 @@
-Hi, I'm Seanneol 👋
-Computer Science student | Building, learning, and improving through code
-I enjoy turning what I learn into practical projects. My work so far includes web development, data structures, and algorithm labs—with a focus on writing clear code, testing ideas, and steadily growing my skills.
+# Hi, I'm Seanneol 👋
 
-🧰 Skills & tools
-Area	Experience
-Web development	HTML, organizing pages and project files
-Computer science	Data structures and algorithms (coursework and lab practice)
-Version control	Git and GitHub: branches, commits, remotes, and pushing projects
-I’m actively learning and expanding this list as I complete more projects.
+**Computer Science student | Web development | Problem solving**
 
-📂 Featured work
-Data Structure Lab
-Coursework and practice focused on fundamental data structures and algorithmic problem-solving.
+I enjoy turning what I learn into practical projects. My work so far includes web development, data structures, and algorithm labs. I’m focused on writing clear code, testing ideas, and steadily growing my skills.
 
-Lab 1
+## 🧰 Skills & tools
+
+- **Web development:** HTML and organizing web pages and project files
+- **Computer science:** Data structures, algorithms, and problem-solving practice
+- **Version control:** Git and GitHub, including branches, commits, and repository workflows
+
+## 📂 Featured work
+
+### Data Structure Lab
+Coursework and practice focused on foundational data structures and algorithmic problem-solving.
+
+### Lab 1
 A web-development lab containing HTML pages and related project assets.
 
-🌱 Currently working on
-Strengthening my programming and problem-solving fundamentals
-Practicing clean project structure and version control
-Building and documenting more hands-on projects
-🤝 Connect
-GitHub: @seanneol88
+## 🌱 Currently learning
 
-Thanks for stopping by—I'm always learning, building, and looking for ways to improve.
+- Strengthening my programming and problem-solving fundamentals
+- Practicing clean project structure and version control
+- Building and documenting more hands-on projects
+
+## 🔗 Connect
+
+- **GitHub:** [@seanneol88](https://github.com/seanneol88)
+
+---
+
+*Thanks for stopping by—I'm always learning, building, and looking for ways to improve.*

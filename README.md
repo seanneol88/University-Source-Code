@@ -22,3 +22,5 @@ Practicing clean project structure and version control
 Building and documenting more hands-on projects
 🤝 Connect
 GitHub: @seanneol88
+
+Thanks for stopping by—I'm always learning, building, and looking for ways to improve.

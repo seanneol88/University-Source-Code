@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!-- Fixed: the title element is now properly closed -->
+    <title>Campus Coding Club</title>
+</head>
+<body>
+
+    <!-- ============ PART 1: ERRORS FOUND IN THE GIVEN CODE ============
+         Error 1 (Line 1): missing <!DOCTYPE html> declaration.
+         Error 2 (Line 1): <html> tag was missing the lang attribute.
+         Error 3 (Line 3): <title> was not closed (missing </title>).
+         Error 4 (Line 7): mismatched heading tags, <h1> closed with </h2>.
+         Error 5 (Line 8): improper nesting, </strong></em> should be </em></strong>.
+         Error 6 (Line 8): paragraph not closed, missing </p>.
+         Error 7 (Line 9): closing heading tag written as <h2> instead of </h2>.
+         Error 8 (Line 11): list item not closed, missing </li>.
+         Error 9 (Line 14): list opened with <ul> but wrongly closed with </ol>.
+         Error 10 (Line 15): href value was not quoted and was not a full absolute URL.
+         Error 11 (Line 16): <img> was missing the required alt attribute.
+         Error 12 (Line 17): raw ampersand & used, should be written as &amp;.
+         Error 13 (Line 18): missing </html> closing tag at the end of the document.
+         ================================================================= -->
+
+    <!-- ===== Navigation bar (Part 2): relative links that move
+         between the two pages of the website ===== -->
+    <p>
+        <a href="lab1_ExerB.html">Home</a> |
+        <a href="contact.html">Contact Us</a>
+    </p>
+
+    <!-- ===== Main heading: fixed, <h1> is now closed with </h1> ===== -->
+    <h1>Welcome to Campus Coding Club</h1>
+
+    <!-- ===== Meeting info: nesting fixed to <strong><em>...</em></strong>
+         and the paragraph is properly closed ===== -->
+    <p>We meet every <strong><em>Wednesday</em></strong> at Lab 3.</p>
+
+    <!-- ===== Activities list: heading closed correctly, every <li>
+         closed, and the list closed with </ul> to match <ul> ===== -->
+    <h2>Our Activities</h2>
+    <ul>
+        <li>Weekly coding sessions</li>
+        <li>Hackathon</li>
+        <li>Web design workshop</li>
+    </ul>
+
+    <!-- ===== Advisor quote (Part 2): a short quote from the club
+         advisor placed inside a <blockquote> element ===== -->
+    <h2>A Word from Our Advisor</h2>
+    <blockquote>
+        "Coding is not just about computers; it is about solving problems
+        together. Keep building, keep sharing." — Dr. Razak, Club Advisor
+    </blockquote>
+
+    <!-- ===== External link: fixed with a quoted, full absolute URL ===== -->
+    <p>Visit our university: <a href="https://www.umt.edu.my">UMT Website</a></p>
+
+    <!-- ===== Club image: fixed by adding a meaningful alt attribute ===== -->
+    <img src="club.jpg" alt="Members of the Campus Coding Club coding together in Lab 3">
+
+    <!-- ===== Footer: fixed using the special characters &copy; and &amp; ===== -->
+    <p>&copy; 2026 Campus Coding Club &amp; Friends</p>
+
+    <!-- End of the home page -->
+</body>
+</html>

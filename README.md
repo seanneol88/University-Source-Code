@@ -15,6 +15,9 @@ I enjoy turning what I learn into practical projects. My work so far includes we
 ### Data Structure Lab
 Coursework and practice focused on foundational data structures and algorithmic problem-solving.
 
+### Data Structure Lab 3 – Stack
+Java implementation of an array-based character stack (`ChrStack`), used to print a name in reverse and to convert a binary number into decimal.
+
 ### Lab 1
 A web-development lab containing HTML pages and related project assets.
 

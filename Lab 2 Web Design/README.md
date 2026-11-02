@@ -13,7 +13,7 @@ HTML coursework — form, lab2, Lab2_ExerA, Lab2_ExerB, semantic ….
 | `Lab2_ExerA.html` | HTML | 171 |
 | `Lab2_ExerB validation.png` | Image |  |
 | `Lab2_ExerB.html` | HTML | 164 |
-| `README.md` | Markdown | 24 |
+| `README.md` | Markdown | 25 |
 | `semantic.html` | HTML | 37 |
 | `table.html` | HTML | 45 |
 

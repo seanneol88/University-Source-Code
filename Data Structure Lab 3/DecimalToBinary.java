@@ -1,6 +1,38 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
+class IntStack {
+    private int[] stack;
+    private int top;
+
+    public IntStack(int size) {
+        stack = new int[size];
+        top = -1;
+    }
+
+    public void push(int value) {
+        if (isFull()) {
+            throw new IllegalStateException("Stack is full");
+        }
+        stack[++top] = value;
+    }
+
+    public int pop() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Stack is empty");
+        }
+        return stack[top--];
+    }
+
+    public boolean isEmpty() {
+        return top == -1;
+    }
+
+    public boolean isFull() {
+        return top == stack.length - 1;
+    }
+}
+
 public class DecimalToBinary {
      public static void main(String[] args) {
         // a. Declare stack s of size 25

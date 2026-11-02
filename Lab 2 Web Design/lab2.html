@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Profile Page - Lab 2</title>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Welcome to My Personal Profile</h1>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="#about">About</a> | 
+        <a href="#info">Personal Info</a> | 
+        <a href="#contact">Contact Form</a>
+    </nav>
+
+    <!-- Main Content Section -->
+    <section id="about">
+        <article>
+            <h2>About Me</h2>
+            <p>Hello! This webpage is created as part of Lab Exercise 2. It demonstrates the usage of advanced HTML features including tables, interactive forms, and semantic structure.</p>
+        </article>
+    </section>
+
+    <!-- Personal Information Table Section -->
+    <section id="info">
+        <article>
+            <h2>Personal Information Table</h2>
+            <table border="1">
+                <tr>
+                    <th>Attribute</th>
+                    <th>Details</th>
+                    <th>Category</th>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>Muhammad Faris Danial Bin Izham</td>
+                    <td>Personal</td>
+                </tr>
+                <tr>
+                    <td>Age</td>
+                    <td>20</td>
+                    <td>Personal</td>
+                </tr>
+                <tr>
+                    <td>Occupation</td>
+                    <td>Software Engineering Student</td>
+                    <td>Professional</td>
+                </tr>
+            </table>
+        </article>
+    </section>
+
+    <!-- Interactive Form Section -->
+    <section id="contact">
+        <article>
+            <h2>User Information Form</h2>
+            <form action="submit_form.php" method="post">
+                <!-- Text Inputs -->
+                <label for="fullname">Full Name:</label><br>
+                <input type="text" id="fullname" name="fullname" placeholder="Enter your name" required><br><br>
+
+                <label for="email">Email Address:</label><br>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required><br><br>
+
+                <!-- Radio Buttons for Gender -->
+                <label>Gender:</label><br>
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male">Male</label><br>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">Female</label><br><br>
+
+                <!-- Checkboxes for Hobbies -->
+                <label>Favorite Hobbies:</label><br>
+                <input type="checkbox" id="hobby1" name="hobby1" value="Coding">
+                <label for="hobby1"> Coding</label><br>
+                <input type="checkbox" id="hobby2" name="hobby2" value="Gaming">
+                <label for="hobby2"> Gaming</label><br>
+                <input type="checkbox" id="hobby3" name="hobby3" value="Reading">
+                <label for="hobby3"> Reading</label><br><br>
+
+                <!-- Submit Button -->
+                <input type="submit" value="Submit">
+            </form>
+        </article>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2026 Personal Profile Page. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

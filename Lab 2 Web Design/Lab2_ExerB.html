@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Course Feedback</title>
+</head>
+<body>
+
+    <!-- ============ PART 1: ERRORS FOUND IN THE GIVEN CODE ============
+         Error 1 (Line 10): header was wrongly closed with </head>;
+                            it must be </header>.
+         Error 2 (Line 20): third header cell used <td> instead of <th>
+                            for "Rating".
+         Error 3 (Line 26): the Week 1 row was not closed; </tr> missing
+                            before the next <tr>.
+         Error 4 (Line 28): colspan="3" created an extra column; with the
+                            Week cell it should be colspan="2".
+         Error 5 (Line 32): the "Semantic HTML" cell was not closed;
+                            missing </td> before the next <td>.
+         Error 6 (Line 40): label for="name" did not match the input
+                            id="fullname"; both must be the same.
+         Error 7 (Lines 42-44): the radio buttons had different name
+                            attributes (good / poor), so both could be
+                            selected; they must share one name.
+         Error 8 (Line 47): label for="labs" did not match the checkbox
+                            id="lab".
+         Error 9 (Line 49): the form was closed with </from>; correct
+                            spelling is </form>.
+         Error 10 (Line 52): the special character was written as &copy
+                            without the semicolon; correct form is &copy;.
+         ================================================================= -->
+
+    <!-- ===== Header and navigation =====
+         Part 2: added a third link to the new #comments section -->
+    <header>
+        <h1>CSF3133 Course Feedback</h1>
+    </header>
+    <nav>
+        <a href="#results">Results</a> |
+        <a href="#form">Feedback Form</a> |
+        <a href="#comments">Student Comments</a>
+    </nav>
+
+    <!-- ===== Feedback summary table (fixed) =====
+         Part 2 extension: Week 4 and Week 5 share the same topic
+         "Mini Project" using rowspan="2" on the Topic cell, and a
+         final "Average Rating" row using colspan="2" ===== -->
+    <section id="results">
+        <h2>Feedback Summary</h2>
+        <table border="1">
+            <tr>
+                <th>Week</th>
+                <th>Topic</th>
+                <th>Rating</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Introduction to HTML</td>
+                <td>4.5</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td colspan="2">Tables and Forms</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Semantic HTML</td>
+                <td>4.0</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td rowspan="2">Mini Project</td>
+                <td>4.2</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>4.4</td>
+            </tr>
+            <tr>
+                <td colspan="2">Average Rating</td>
+                <td>4.3</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- ===== Feedback form (fixed and extended) =====
+         Part 2 additions: an E-mail input (from the E-mail label
+         downwards), a third radio option "Average" in the same
+         group, three "practice topics" checkboxes and a Section
+         drop-down list ===== -->
+    <section id="form">
+        <h2>Give Your Feedback</h2>
+        <form action="submit_feedback.php" method="post">
+
+            <label for="fullname">Name:</label>
+            <input type="text" id="fullname" name="name"><br>
+
+            <!-- New: E-mail text input with a matching label -->
+            <label for="email">E-mail:</label>
+            <input type="text" id="email" name="email"><br>
+
+            <p>Overall rating:</p>
+            <!-- All radio buttons share name="rating" so only one
+                 can be selected at a time -->
+            <input type="radio" id="good" name="rating" value="good">
+            <label for="good">Good</label>
+
+            <!-- New: third radio option in the same group -->
+            <input type="radio" id="average" name="rating" value="average">
+            <label for="average">Average</label>
+
+            <input type="radio" id="poor" name="rating" value="poor">
+            <label for="poor">Poor</label><br>
+
+            <input type="checkbox" id="lab" name="lab" value="yes">
+            <label for="lab">I attended all labs</label><br>
+
+            <!-- New: group of three checkboxes for practice topics -->
+            <p>Topics I want more practice on:</p>
+            <input type="checkbox" id="topic1" name="tables" value="yes">
+            <label for="topic1">Tables</label>
+
+            <input type="checkbox" id="topic2" name="forms" value="yes">
+            <label for="topic2">Forms</label>
+
+            <input type="checkbox" id="topic3" name="semantic" value="yes">
+            <label for="topic3">Semantic HTML</label><br>
+
+            <!-- New: drop-down list for Section/Group (3 options) -->
+            <label for="section">Section/Group:</label>
+            <select id="section" name="section">
+                <option value="k1">K1</option>
+                <option value="k2">K2</option>
+                <option value="k3">K3</option>
+            </select><br><br>
+
+            <input type="submit" value="Submit">
+        </form>
+    </section>
+
+    <!-- ===== New section for Part 2: Student Comments with two
+         <article> elements, each holding a student name (<h3>)
+         and their comment (<p>) ===== -->
+    <section id="comments">
+        <h2>Student Comments</h2>
+
+        <article>
+            <h3>Roberto Carlos</h3>
+            <p>The hands-on labs helped me understand forms much better than the lectures alone.</p>
+        </article>
+
+        <article>
+            <h3>Mei Ling</h3>
+            <p>More practice on tables, especially rowspan and colspan, would really help before the test.</p>
+        </article>
+    </section>
+
+    <!-- ===== Footer with the corrected &copy; special character ===== -->
+    <footer>
+        <p>Copyright &copy; 2026 CSF3133</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!-- Page title: the event name shown on the browser tab -->
+    <title>FSKM Tech Day 2026</title>
+</head>
+<body>
+
+    <!-- ===== Semantic header: contains the event name (h1)
+         and a short tagline ===== -->
+    <header>
+        <h1>FSKM Tech Day 2026</h1>
+        <p><em>"Learn. Build. Connect." — one day of code, career talks and games.</em></p>
+    </header>
+
+    <!-- ===== Navigation: internal links that jump to each
+         section of this page using the section ids ===== -->
+    <nav>
+        <a href="#about">About the Event</a> |
+        <a href="#schedule">Event Schedule</a> |
+        <a href="#register">Registration</a>
+    </nav>
+
+    <!-- ===== Section 1 of 3: About the Event.
+         Contains two <article> elements, one speaker and one
+         activity, each with an <h3> title and a <p> ===== -->
+    <section id="about">
+        <h2>About the Event</h2>
+        <p>
+            FSKM Tech Day 2026 is a one-day event organised by the Faculty of
+            Computer Science and Mathematics. Join us for talks, hands-on
+            sessions and a mini hackathon. Open to all students, free of charge.
+        </p>
+
+        <article>
+            <h3>Speaker: Dr. Siti Mariam</h3>
+            <p>Senior data scientist who will share how machine learning is used in real Malaysian industries.</p>
+        </article>
+
+        <article>
+            <h3>Activity: Mini Hackathon</h3>
+            <p>Teams of three solve a fun coding challenge in three hours. Prizes for the top three teams!</p>
+        </article>
+    </section>
+
+    <!-- ===== Section 2 of 3: Event Schedule.
+         Table with border, header cells (th) for Time, Activity,
+         Venue and Person in Charge. Includes:
+         - rowspan="2" on the "Computer Lab 1" venue cell used by
+           two consecutive morning sessions
+         - colspan="3" on the Lunch Break row so it spans across
+           the Activity, Venue and Person in Charge columns ===== -->
+    <section id="schedule">
+        <h2>Event Schedule</h2>
+        <table border="1">
+            <tr>
+                <th>Time</th>
+                <th>Activity</th>
+                <th>Venue</th>
+                <th>Person in Charge</th>
+            </tr>
+            <tr>
+                <td>8:00 - 9:00 AM</td>
+                <td>Registration and Breakfast</td>
+                <td>FSKM Lobby</td>
+                <td>Committee Members</td>
+            </tr>
+            <tr>
+                <td>9:00 - 10:30 AM</td>
+                <td>Opening Talk: Career in Tech</td>
+                <td rowspan="2">Computer Lab 1</td>
+                <td>Dr. Siti Mariam</td>
+            </tr>
+            <tr>
+                <td>10:30 AM - 12:30 PM</td>
+                <td>Hands-on: Build Your First Web Page</td>
+                <td>Mr. Ahmad Faiz</td>
+            </tr>
+            <tr>
+                <td>12:30 - 2:00 PM</td>
+                <td colspan="3">Lunch Break (Faculty Dining Hall)</td>
+            </tr>
+            <tr>
+                <td>2:00 - 3:30 PM</td>
+                <td>Mini Hackathon Briefing and Team Formation</td>
+                <td rowspan="2">Auditorium</td>
+                <td>Ms. Nurul Aini</td>
+            </tr>
+            <tr>
+                <td>3:30 - 5:00 PM</td>
+                <td>Mini Hackathon Coding Session</td>
+                <td>Team Mentors</td>
+            </tr>
+            <tr>
+                <td>5:00 - 5:30 PM</td>
+                <td>Prize Giving and Closing Ceremony</td>
+                <td>Auditorium</td>
+                <td>Dean of FSKM</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- ===== Section 3 of 3: Registration form.
+         - Text inputs for Full Name, Matric Number and E-mail, each
+           with a <label> whose for matches the input id
+         - Radio buttons Year 1 to Year 4 sharing the same name
+           ("year") so only one can be selected
+         - Three checkboxes for the sessions to join
+         - A <select> drop-down list with 4 programme options
+         - A submit button ===== -->
+    <section id="register">
+        <h2>Registration</h2>
+        <form action="register.html" method="post">
+
+            <label for="fullname">Full Name:</label>
+            <input type="text" id="fullname" name="fullname"><br>
+
+            <label for="matric">Matric Number:</label>
+            <input type="text" id="matric" name="matric"><br>
+
+            <label for="email">E-mail:</label>
+            <input type="text" id="email" name="email"><br>
+
+            <!-- Grouped radio buttons: one shared name, one pick -->
+            <p>Year of Study:</p>
+            <input type="radio" id="year1" name="year" value="Year 1">
+            <label for="year1">Year 1</label>
+
+            <input type="radio" id="year2" name="year" value="Year 2">
+            <label for="year2">Year 2</label>
+
+            <input type="radio" id="year3" name="year" value="Year 3">
+            <label for="year3">Year 3</label>
+
+            <input type="radio" id="year4" name="year" value="Year 4">
+            <label for="year4">Year 4</label>
+
+            <!-- Checkboxes: student may join one or more sessions -->
+            <p>Sessions you want to join:</p>
+            <input type="checkbox" id="sess1" name="career_talk" value="yes">
+            <label for="sess1">Career in Tech Talk</label>
+
+            <input type="checkbox" id="sess2" name="web_workshop" value="yes">
+            <label for="sess2">Web Page Workshop</label>
+
+            <input type="checkbox" id="sess3" name="hackathon" value="yes">
+            <label for="sess3">Mini Hackathon</label><br>
+
+            <!-- Drop-down list with at least 4 programme options -->
+            <label for="programme">Programme:</label>
+            <select id="programme" name="programme">
+                <option value="se">Computer Science (Software Engineering)</option>
+                <option value="mm">Computer Science (Multimedia Computing)</option>
+                <option value="fm">Mathematics (Financial Mathematics)</option>
+                <option value="am">Mathematics (Applied Mathematics)</option>
+            </select><br><br>
+
+            <input type="submit" value="Register Now">
+        </form>
+    </section>
+
+    <!-- ===== Semantic footer: organiser name and a copyright
+         line using the &copy; special character ===== -->
+    <footer>
+        <p>Organised by the FSKM Student Committee (SEJATI).</p>
+        <p>&copy; 2026 Faculty of Computer Science and Mathematics. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

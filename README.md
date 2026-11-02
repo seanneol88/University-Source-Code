@@ -2,6 +2,8 @@
 
 **Computer Science student | Web development | Problem solving**
 
+[![Build and deploy site](https://github.com/seanneol88/University-Source-Code/actions/workflows/pages.yml/badge.svg)](https://github.com/seanneol88/University-Source-Code/actions/workflows/pages.yml)
+
 **🌐 Live site:** <https://seanneol88.github.io/University-Source-Code/> — built automatically from this repository on every push.
 
 I enjoy turning what I learn into practical projects. My work so far includes web development, data structures, and algorithm labs. I’m focused on writing clear code, testing ideas, and steadily growing my skills.

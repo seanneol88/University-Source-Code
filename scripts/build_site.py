@@ -921,8 +921,10 @@ def main(argv: list[str] | None = None) -> int:
 
     if not args.no_readme:
         changed: list[str] = []
-        # two passes: adding a README changes file counts, so re-scan before writing the index
-        for _ in range(2):
+        # Iterate to a fixed point: writing a README changes the file list it documents
+        # (it lists its own line count), so re-scan until a pass makes no changes.
+        for _ in range(5):
+            wrote_something = False
             builder = SiteBuilder(root, (root / args.out).resolve())
             for project in builder.projects:
                 existing = None
@@ -935,8 +937,12 @@ def main(argv: list[str] | None = None) -> int:
                 if generated != existing:
                     project.readme.write_text(generated, encoding="utf-8")
                     changed.append(project.name)
+                    wrote_something = True
             if update_root_readme(root, builder.projects, builder.site_prefix):
                 changed.append("README.md")
+                wrote_something = True
+            if not wrote_something:
+                break
         for name in dict.fromkeys(changed):
             print(f"updated README: {name}")
 

@@ -142,7 +142,7 @@ def render_markdown(text: str) -> str:
 
     return markdown.markdown(
         text,
-        extensions=["fenced_code", "tables", "sane_lists", "nl2br", "attr_list"],
+        extensions=["fenced_code", "tables", "sane_lists", "attr_list"],
         output_format="html5",
     )
 
@@ -192,7 +192,17 @@ def _fallback_markdown(text: str) -> str:
 
 
 def _inline(text: str) -> str:
+    # let simple raw HTML (badges, line breaks) through instead of escaping it
+    tags: list[str] = []
+
+    def stash_tag(match: re.Match) -> str:
+        tags.append(match.group(0))
+        return f"\x00TAG{len(tags) - 1}\x00"
+
+    text = re.sub(r"</?[a-zA-Z][^>]*>", stash_tag, text)
     text = esc(text)
+    text = re.sub(r"\x00TAG(\d+)\x00", lambda m: tags[int(m.group(1))], text)
+    text = re.sub(r"!\[([^\]]*)\]\(([^)]+)\)", r'<img src="\2" alt="\1">', text)
     text = re.sub(r"`([^`]+)`", r"<code>\1</code>", text)
     text = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", text)
     text = re.sub(r"(?<!\*)\*([^*]+)\*(?!\*)", r"<em>\1</em>", text)
@@ -201,6 +211,21 @@ def _inline(text: str) -> str:
 
 
 LINK_RE = re.compile(r"(!?)\[([^\]]*)\]\(([^)\s]+)(\s+\"[^\"]*\")?\)")
+BADGE_RE = re.compile(r"\[!\[([^\]]*)\]\(([^)\s]+)\)\]\(([^)\s]+)\)")
+AUTOLINK_RE = re.compile(r"<((?:https?://|mailto:)[^>\s]+)>")
+
+
+def normalise_markdown(md: str) -> str:
+    """Turn constructs the markdown engine cannot nest into plain HTML/links.
+
+    * ``[![alt](img)](url)``  ->  <a href="url"><img src="img" alt="alt"></a>
+    * ``<https://example.com>`` -> ``[https://example.com](https://example.com)``
+    """
+    md = BADGE_RE.sub(
+        lambda m: f'<a href="{m.group(3)}"><img src="{m.group(2)}" alt="{html.escape(m.group(1))}"></a>',
+        md)
+    md = AUTOLINK_RE.sub(lambda m: f"[{m.group(1)}]({m.group(1)})", md)
+    return md
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.*)$", re.MULTILINE)
 FENCE_RE = re.compile(r"```.*?```", re.DOTALL)
 
@@ -213,7 +238,7 @@ def rewrite_links(md: str, resolver) -> str:
         fenced.append(match.group(0))
         return f"\x00FENCE{len(fenced) - 1}\x00"
 
-    protected = FENCE_RE.sub(stash, md)
+    protected = FENCE_RE.sub(stash, normalise_markdown(md))
 
     def repl(match: re.Match) -> str:
         bang, label, target, title = match.group(1), match.group(2), match.group(3), match.group(4) or ""
@@ -499,7 +524,7 @@ h3.group { font-size: 1.05rem; margin: 26px 0 12px; color: var(--text); }
 .prose th { background: var(--bg-soft); }
 .prose blockquote { margin: 1.2em 0; padding: .6em 1em; border-left: 3px solid var(--accent);
   background: rgba(110,168,254,.07); border-radius: 0 10px 10px 0; color: var(--muted); }
-.prose img { max-width: 100%; border-radius: 10px; border: 1px solid var(--border); }
+.prose img { max-width: 100%; border-radius: 10px; border: 1px solid var(--border); vertical-align: middle; }
 .prose hr { border: 0; border-top: 1px solid var(--border); margin: 2em 0; }
 
 .crumbs { color: var(--muted); font-size: .88rem; padding: 26px 0 0; }

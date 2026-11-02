@@ -8,3 +8,7 @@ Thumbs.db
 *.swp
 .idea/
 .vscode/
+
+# Python bytecode
+__pycache__/
+*.pyc

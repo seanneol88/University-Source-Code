@@ -22,15 +22,17 @@ jobs:
   build:
     name: Build site
     runs-on: ubuntu-latest
+    outputs:
+      pages_enabled: ${{ steps.pages_state.outputs.enabled }}
     env:
       GITHUB_REPOSITORY: ${{ github.repository }}
       GITHUB_SHA: ${{ github.sha }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.12"
 
@@ -54,20 +56,42 @@ jobs:
             git push
           fi
 
+      - name: Check whether GitHub Pages is enabled
+        id: pages_state
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh api "repos/${GITHUB_REPOSITORY}/pages" >/dev/null 2>&1; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            {
+              echo "## ⚠️ GitHub Pages is not enabled yet"
+              echo ""
+              echo "The site was built successfully, but it cannot be published until Pages is turned on."
+              echo ""
+              echo "1. Open <https://github.com/${GITHUB_REPOSITORY}/settings/pages>"
+              echo "2. Set **Build and deployment → Source** to **GitHub Actions**."
+              echo "3. Re-run this workflow (Actions → Build and deploy site → Re-run jobs)."
+              echo ""
+              echo "The site will then be live at <https://seanneol88.github.io/University-Source-Code/>."
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
       - name: Configure Pages
-        uses: actions/configure-pages@v5
-        with:
-          # creates the Pages site on the first run so no manual setup is needed
-          enablement: true
+        if: steps.pages_state.outputs.enabled == 'true'
+        uses: actions/configure-pages@v6
 
       - name: Upload site artifact
-        uses: actions/upload-pages-artifact@v3
+        if: steps.pages_state.outputs.enabled == 'true'
+        uses: actions/upload-pages-artifact@v5
         with:
           path: _site
 
   deploy:
     name: Deploy to GitHub Pages
     needs: build
+    if: needs.build.outputs.pages_enabled == 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -75,4 +99,4 @@ jobs:
     steps:
       - name: Deploy
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

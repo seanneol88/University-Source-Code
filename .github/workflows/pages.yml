@@ -1,0 +1,102 @@
+name: Build and deploy site
+
+# Rebuilds the site and the auto-generated READMEs from the repository itself.
+# Runs on every push to main, on demand, and once a week so the index never drifts.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * 1"   # every Monday, 03:17 UTC
+
+permissions:
+  contents: write      # lets the job commit the refreshed READMEs
+  pages: write         # lets the job publish to GitHub Pages
+  id-token: write      # required by actions/deploy-pages
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build site
+    runs-on: ubuntu-latest
+    outputs:
+      pages_enabled: ${{ steps.pages_state.outputs.enabled }}
+    env:
+      GITHUB_REPOSITORY: ${{ github.repository }}
+      GITHUB_SHA: ${{ github.sha }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: python -m pip install --quiet --disable-pip-version-check markdown
+
+      - name: Build site and refresh READMEs
+        run: python scripts/build_site.py --out _site
+
+      - name: Commit refreshed READMEs
+        # Pushes made with GITHUB_TOKEN do not retrigger this workflow, so there is no loop.
+        continue-on-error: true
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- README.md '*/README.md'
+          if git diff --cached --quiet; then
+            echo "READMEs already up to date"
+          else
+            git commit -m "docs: refresh auto-generated README index [skip ci]"
+            git push
+          fi
+
+      - name: Check whether GitHub Pages is enabled
+        id: pages_state
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh api "repos/${GITHUB_REPOSITORY}/pages" >/dev/null 2>&1; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            {
+              echo "## ⚠️ GitHub Pages is not enabled yet"
+              echo ""
+              echo "The site was built successfully, but it cannot be published until Pages is turned on."
+              echo ""
+              echo "1. Open <https://github.com/${GITHUB_REPOSITORY}/settings/pages>"
+              echo "2. Set **Build and deployment → Source** to **GitHub Actions**."
+              echo "3. Re-run this workflow (Actions → Build and deploy site → Re-run jobs)."
+              echo ""
+              echo "The site will then be live at <https://seanneol88.github.io/University-Source-Code/>."
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Configure Pages
+        if: steps.pages_state.outputs.enabled == 'true'
+        uses: actions/configure-pages@v6
+
+      - name: Upload site artifact
+        if: steps.pages_state.outputs.enabled == 'true'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    if: needs.build.outputs.pages_enabled == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v5

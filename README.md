@@ -36,6 +36,7 @@ A web-development lab containing HTML pages and related project assets.
 | [Data Structure Lab 2](https://seanneol88.github.io/University-Source-Code/labs/data-structure-lab-2/) | Java coursework — MyLinkedList, Node, TestLinkedList. | 4 | Java |
 | [Data Structure Lab 3](https://seanneol88.github.io/University-Source-Code/labs/data-structure-lab-3/) | This folder contains my Java source code for Lab 3: Stack (Lab manual version 2, 2026/2027). The manual copy I worked from is titled "Lab03-Stack w… | 4 | Java |
 | [Lab 1 Web Design](https://seanneol88.github.io/University-Source-Code/labs/lab-1-web-design/) | HTML coursework — contact, lab1, lab1_ExerA, lab1_ExerB. | 8 | HTML |
+| [Lab 2 Web Design](https://seanneol88.github.io/University-Source-Code/labs/lab-2-web-design/) | HTML coursework — form, lab2, Lab2_ExerA, Lab2_ExerB, semantic …. | 9 | HTML |
 
 🌐 Browse all of it as a website: **https://seanneol88.github.io/University-Source-Code/**
 <!-- AUTO-GENERATED:PROJECTS:END -->

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Creating Forms</title>
+</head>
+<body>
+
+    <h2>Registration Form</h2>
+    <form action="submit_form.php" method="post">
+        <!-- Basic Text Inputs -->
+        <label for="fname">First Name:</label><br>
+        <input type="text" id="fname" name="firstname"><br><br>
+
+        <label for="lname">Last Name:</label><br>
+        <input type="text" id="lname" name="lastname"><br><br>
+
+        <!-- Radio Buttons -->
+        <label for="gender">Gender:</label><br>
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="male">Male</label><br>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Female</label><br><br>
+
+        <!-- Checkboxes -->
+        <label for="hobby">Select your hobbies:</label><br>
+        <input type="checkbox" id="hobby1" name="hobby1" value="Reading">
+        <label for="hobby1"> Reading</label><br>
+        <input type="checkbox" id="hobby2" name="hobby2" value="Gaming">
+        <label for="hobby2"> Gaming</label><br><br>
+
+        <!-- Dropdown Select Menu -->
+        <label for="country">Choose a country:</label><br>
+        <select id="country" name="country">
+            <option value="usa">USA</option>
+            <option value="canada">Canada</option>
+            <option value="uk">UK</option>
+        </select><br><br>
+
+        <!-- Submit Button -->
+        <input type="submit" value="Submit">
+    </form>
+
+</body>
+</html>

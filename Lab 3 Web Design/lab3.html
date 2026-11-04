@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Page title shown on the browser tab -->
+    <title>Contact Us - TechWeb Solutions</title>
+</head>
+<body>
+
+    <!-- ========== DIV 1: HEADER SECTION ==========
+         Uses a block element (<h1>) for the website title and an
+         inline element (<span>) inside the header for the slogan.
+         The &amp; entity displays the & symbol in the slogan. -->
+    <div>
+        <h1>TechWeb Solutions</h1>
+        <p><span>Web Design &amp; Development — <em>your ideas, our code</em></span></p>
+    </div>
+
+    <!-- ========== DIV 2: CONTENT SECTION ==========
+         Contains the contact form and, nested inside it, a third
+         div for the inline calculator -->
+    <div>
+
+        <!-- Contact form with HTML5 form elements:
+             type="email" for the user contact e-mail,
+             type="date" for the preferred contact date,
+             type="range" slider for the satisfaction level,
+             and a submit button. Every input has a matching
+             label element linked with for/id -->
+        <h2>Contact Us</h2>
+        <form action="send.html" method="post">
+            <label for="fullname">Full Name:</label>
+            <input type="text" id="fullname" name="fullname" placeholder="e.g. Ali bin Abu" required><br><br>
+
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required><br><br>
+
+            <label for="contactdate">Preferred Contact Date:</label>
+            <input type="date" id="contactdate" name="contactdate" required><br><br>
+
+            <label for="satisfaction">How satisfied are you with our services? (0 - 10)</label><br>
+            0 <input type="range" id="satisfaction" name="satisfaction" min="0" max="10" step="1" value="5"> 10<br><br>
+
+            <input type="submit" value="Send Message">
+        </form>
+
+        <!-- ========== DIV 3: INLINE CALCULATOR (nested inside the
+             content section). Two number <input> fields with ids are
+             added together, and the <output> element shows the sum
+             dynamically. The form's oninput attribute recalculates
+             every time a value changes; the output's for attribute
+             refers to the ids involved in the calculation. ========== -->
+        <div>
+            <h3>Quick Sum Calculator</h3>
+            <p>Enter two numbers and the total appears instantly.</p>
+            <form oninput="total.value = parseFloat(firstNum.value) + parseFloat(secondNum.value)">
+                <input type="number" id="firstNum" name="firstNum" value="0">
+                +
+                <input type="number" id="secondNum" name="secondNum" value="0">
+                =
+                <output name="total" for="firstNum secondNum">0</output>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- ========== DIV 4: FOOTER SECTION ==========
+         Contact information, with the copyright symbol displayed
+         using the &copy; HTML entity -->
+    <div>
+        <hr>
+        <p>
+            TechWeb Solutions, Kuala Nerus, Terengganu<br>
+            E-mail: <a href="/cdn-cgi/l/email-protection#640c0108080b241001070c1301064a070b09"><span class="__cf_email__" data-cfemail="bed6dbd2d2d1fecadbddd6c9dbdc90ddd1d3">[email&#160;protected]</span></a> |
+            Phone: +60 9-555 0123
+        </p>
+        <p>&copy; 2026 TechWeb Solutions. All rights reserved.</p>
+    </div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f","spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>

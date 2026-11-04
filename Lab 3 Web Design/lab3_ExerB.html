@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Page title shown on the browser tab -->
+    <title>Ticket Booking &ndash; e-Ticket</title>
+</head>
+<body>
+
+    <!-- ==================================================================
+         LAB EXERCISE 3 - PROBLEM B : Ticket Booking
+         PART 1 - ERRORS FOUND IN THE GIVEN CODE (line numbers refer to
+         the code printed in the lab sheet)
+         ==================================================================
+         Error 1  (Line 1)  : <!DOCTYPE> is missing the "html" keyword, so
+                              the browser falls into quirks mode.
+                              Correct form: <!DOCTYPE html>
+         Error 2  (Line 9)  : crossed tags - <h1>e-Ticket <span>Your Campus
+                              Cinema</h1></span> closes the <h1> before the
+                              <span>; every element must be closed in the
+                              reverse order it was opened.
+         Error 3  (Line 11) : <span id="content"> wraps headings, a
+                              paragraph and a form. A <span> is an inline
+                              element and cannot contain block content, so
+                              it must be <div id="content"> ... </div>.
+         Error 4  (Line 13) : the raw "<" in "tickets < RM10" is read as the
+                              start of a tag; it must be written &lt;.
+         Error 5  (Line 13) : "&amp staff" is missing its semicolon, so the
+                              entity never ends. Correct form: &amp;
+         Error 6  (Line 14) : oninput="total.value = adult.value + child.value"
+                              adds two strings, so 2 + 3 shows "23" instead
+                              of 5. The values must be converted to numbers
+                              with parseFloat() / parseInt().
+         Error 7  (Line 18) : type="emial" is a typo, so the field falls
+                              back to plain text and accepts anything.
+                              Correct form: type="email"
+         Error 8  (Line 18) : the e-mail input has no required attribute,
+                              so the form can be submitted without it.
+         Error 9  (Line 22) : list="movies" does not match <datalist
+                              id="movielist">, so no suggestions appear.
+                              Both names must be identical.
+         Error 10 (Lines 24-25): the <option> elements are never closed, so
+                              the second option is parsed inside the first.
+                              Each needs its own </option>.
+         Error 11 (Line 32) : the range has min="5" max="1" - reversed, so
+                              the slider jumps back. It needs min="1" max="5"
+                              (plus step="1" and a starting value).
+         Error 12 (Line 33) : <output ... for="adult kid"> names an id "kid"
+                              that does not exist; the input's id is "child".
+         Error 13 (Line 38) : &Copy; is written with a capital C. Entity
+                              names are case-sensitive - it must be &copy;.
+         ================================================================== -->
+
+    <!-- ===== HEADER (Error 2 fixed: <span> closes before </h1>) ===== -->
+    <div id="header">
+        <h1>e-Ticket <span>Your Campus Cinema</span></h1>
+    </div>
+
+    <!-- ===== CONTENT (Error 3 fixed: block container, not a <span>) ===== -->
+    <div id="content">
+
+        <h2>Book Your Ticket</h2>
+
+        <!-- Error 4 and Error 5 fixed: &lt; for "<" and &amp; for "&" -->
+        <p>Promotion: tickets &lt; RM10 for students &amp; staff!</p>
+
+        <!-- FORM
+             Errors 6 and 12 fixed in the oninput handler: the ticket
+             values are converted to numbers, and both outputs are
+             recalculated - total tickets and total price
+             (adult RM 12, child RM 8). -->
+        <form action="booking.php" method="post"
+              oninput="var a = parseInt(adult.value) || 0, c = parseInt(child.value) || 0;
+                       total.value = a + c;
+                       price.value = (a * 12) + (c * 8)">
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name"
+                   placeholder="Enter your name" required autofocus><br>
+
+            <!-- Errors 7 and 8 fixed: type="email" and required -->
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email"
+                   placeholder="you@example.com" required><br>
+
+            <!-- NEW: phone number input (type="tel") with placeholder and required -->
+            <label for="phone">Phone number:</label>
+            <input type="tel" id="phone" name="phone"
+                   placeholder="012-3456789" required><br>
+
+            <label for="date">Show date:</label>
+            <input type="date" id="date" name="date"><br>
+
+            <!-- NEW: show time input (type="time") -->
+            <label for="showtime">Show time:</label>
+            <input type="time" id="showtime" name="showtime"><br>
+
+            <!-- Error 9 fixed: list="movies" now matches datalist id="movies" -->
+            <label for="movie">Movie:</label>
+            <input type="text" id="movie" name="movie" list="movies"><br>
+            <datalist id="movies">
+                <!-- Error 10 fixed: every option is closed -->
+                <option value="Space Rangers"></option>
+                <option value="Kampung Comedy"></option>
+                <option value="Hantu Kak Limah"></option>
+            </datalist>
+
+            <label for="adult">Adult tickets (RM 12):</label>
+            <input type="number" id="adult" name="adult" min="0" value="0"><br>
+
+            <label for="child">Child tickets (RM 8):</label>
+            <input type="number" id="child" name="child" min="0" value="0"><br>
+
+            <!-- Error 11 fixed: min 1, max 5, step 1 -->
+            <label for="rating">Rate our service:</label>
+            <input type="range" id="rating" name="rating" min="1" max="5" step="1" value="3"><br>
+
+            <!-- Error 12 fixed: for="adult child" (ids that really exist) -->
+            Total tickets: <output name="total" for="adult child">0</output><br>
+
+            <!-- NEW: second output for the price -->
+            Total price (RM): <output name="price" for="adult child">0</output><br>
+
+            <input type="submit" value="Book Now">
+        </form>
+
+    </div>
+
+    <!-- ===== NEW SECTION: SIDEBAR "Now Showing" =====
+         Three movies; each line mixes inline elements - the title in
+         <strong>, the age rating in <span> and a trailer <a>. -->
+    <div id="sidebar">
+
+        <h2>Now Showing</h2>
+
+        <ul>
+            <li>
+                <strong>Space Rangers</strong>
+                <span>(P12)</span> &ndash;
+                <a href="trailers/space-rangers.mp4">watch trailer</a>
+            </li>
+            <li>
+                <strong>Kampung Comedy</strong>
+                <span>(U)</span> &ndash;
+                <a href="trailers/kampung-comedy.mp4">watch trailer</a>
+            </li>
+            <li>
+                <strong>Hantu Kak Limah</strong>
+                <span>(P16)</span> &ndash;
+                <a href="trailers/hantu-kak-limah.mp4">watch trailer</a>
+            </li>
+        </ul>
+
+    </div>
+
+    <!-- ===== FOOTER =====
+         Error 13 fixed: &copy;
+         Entity requirement: &reg; for the brand, &lt; for "<" and
+         &amp; for "&". -->
+    <div id="footer">
+
+        <hr>
+
+        <p>
+            e-Ticket&reg; &ndash; Campus Cinema &lt; RM10 every Tuesday
+        </p>
+        <p>
+            CineKampus &amp; Student Council, Block C, Universiti Malaysia Terengganu
+        </p>
+        <p>&copy; 2026 CineKampus. All rights reserved.</p>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Page title: shows the bakery name on the browser tab -->
+    <title>CampusBake&reg; &ndash; Online Order</title>
+</head>
+<body>
+
+    <!-- ==================================================================
+         LAB EXERCISE 3 - PROBLEM A : Campus Bakery Online Order Page
+         HTML only (no CSS). The page is organised with five <div>
+         sections that carry the ids header, nav, content, sidebar
+         and footer.
+         ================================================================== -->
+
+    <!-- ===== SECTION 1 of 5: HEADER =====
+         <h1> is a block element and holds the bakery name, while the
+         inline <span> inside it carries the slogan. &reg; is the
+         registered-trademark entity. -->
+    <div id="header">
+        <h1>CampusBake&reg; <span>Fresh from the oven, right to your dorm</span></h1>
+    </div>
+
+    <!-- ===== SECTION 2 of 5: NAVIGATION =====
+         Three inline <a> links separated by the " | " text so they
+         sit on one line - inline elements flow with the text. -->
+    <div id="nav">
+        <a href="#content">Order form</a> |
+        <a href="#sidebar">Price list</a> |
+        <a href="#footer">Contact us</a>
+    </div>
+
+    <!-- ===== SECTION 3 of 5: CONTENT =====
+         Block elements used here: <h2>, <p>, <ul> and the nested
+         <div> that holds the order form. -->
+    <div id="content">
+
+        <h2>Pre-order your treats</h2>
+
+        <!-- Introduction paragraph: four different INLINE elements -
+             <strong>, <em>, <span> and <a> - inside one block element. -->
+        <p>
+            Welcome to <strong>CampusBake&reg;</strong>, the little bakery run by
+            <em>students</em> for students. Everything is baked
+            <span>on the morning you collect it</span>, so you always get it at its
+            freshest &mdash; check the <a href="#sidebar">price list</a> first.
+            Orders &gt; 10 pieces get a free drink!
+        </p>
+
+        <!-- Nested <div> holding the order form ========================= -->
+        <div id="order">
+
+            <h3>Place your order</h3>
+
+            <!-- FORM: HTML5 input types and attributes.
+                 oninput recalculates the <output> every time a value
+                 changes. parseFloat() converts the text values to
+                 numbers, otherwise "2" + "1" would give "21". -->
+            <form action="order.php" method="post"
+                  oninput="total.value = (parseFloat(cupcakes.value) || 0) * 3 + (parseFloat(slices.value) || 0) * 5">
+
+                <!-- Text input with placeholder, required and autofocus -->
+                <p>
+                    <label for="custname">Your name:</label>
+                    <input type="text" id="custname" name="custname"
+                           placeholder="e.g. Nur Aisyah" required autofocus>
+                </p>
+
+                <!-- tel and email: both required, email is format-checked -->
+                <p>
+                    <label for="phone">Phone number:</label>
+                    <input type="tel" id="phone" name="phone"
+                           placeholder="012-3456789" required>
+                </p>
+                <p>
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name="email"
+                           placeholder="you@example.com" required>
+                </p>
+
+                <!-- date and time pickers -->
+                <p>
+                    <label for="pickupdate">Pick-up date:</label>
+                    <input type="date" id="pickupdate" name="pickupdate">
+                </p>
+                <p>
+                    <label for="pickuftime">Pick-up time:</label>
+                    <input type="time" id="pickuftime" name="pickuftime">
+                </p>
+
+                <!-- Flavour: text input linked to a <datalist> of flavours.
+                     The input's list attribute must match the datalist id. -->
+                <p>
+                    <label for="flavour">Flavour:</label>
+                    <input type="text" id="flavour" name="flavour"
+                           list="flavours" placeholder="Start typing, e.g. Vanilla">
+                    <datalist id="flavours">
+                        <option value="Vanilla"></option>
+                        <option value="Chocolate"></option>
+                        <option value="Red Velvet"></option>
+                        <option value="Pandan"></option>
+                        <option value="Strawberry"></option>
+                    </datalist>
+                </p>
+
+                <!-- Colour picker for the icing -->
+                <p>
+                    <label for="icing">Icing colour:</label>
+                    <input type="color" id="icing" name="icing" value="#f4c2c2">
+                </p>
+
+                <!-- Range slider: min 1, max 5, step 1 -->
+                <p>
+                    <label for="sweetness">Sweetness (1 &ndash; 5):</label>
+                    1 <input type="range" id="sweetness" name="sweetness"
+                             min="1" max="5" step="1" value="3"> 5
+                </p>
+
+                <!-- PRICE CALCULATOR: two number inputs plus an <output>.
+                     Cupcakes are RM 3.00 and cake slices RM 5.00 each;
+                     the output's for attribute names the ids involved. -->
+                <h4>How many?</h4>
+                <p>
+                    <label for="cupcakes">Cupcakes (RM&nbsp;3.00 each):</label>
+                    <input type="number" id="cupcakes" name="cupcakes"
+                           min="0" value="0">
+                </p>
+                <p>
+                    <label for="slices">Cake slices (RM&nbsp;5.00 each):</label>
+                    <input type="number" id="slices" name="slices"
+                           min="0" value="0">
+                </p>
+                <p>
+                    <strong>Total to pay:</strong>
+                    <output name="total" for="cupcakes slices">0</output>
+                </p>
+
+                <p>
+                    <input type="submit" value="Place order">
+                </p>
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- ===== SECTION 4 of 5: SIDEBAR =====
+         The price list uses <ul> and <li>, and four different HTML
+         entities: &reg;, &gt;, &nbsp; and &euro;. -->
+    <div id="sidebar">
+
+        <h2>Price List</h2>
+
+        <ul>
+            <li>Cupcake &ndash; RM&nbsp;3.00</li>
+            <li>Cake slice &ndash; RM&nbsp;5.00</li>
+            <li>Whole cake (8 slices) &ndash; RM&nbsp;38.00</li>
+            <li>Student meal deal &ndash; from &euro;2.50</li>
+        </ul>
+
+        <p>
+            CampusBake&reg; promise: orders &gt; 10 pieces get a free drink
+            &mdash; that is &lt; RM10 extra on your bill.
+        </p>
+
+    </div>
+
+    <!-- ===== SECTION 5 of 5: FOOTER =====
+         &copy; shows the copyright symbol in the footer. -->
+    <div id="footer">
+
+        <hr>
+
+        <p>
+            CampusBake&reg; &ndash; Block C cafeteria, Universiti Malaysia Terengganu<br>
+            Phone: <a href="tel:+6096688000">+60 9-668 8000</a> |
+            E-mail: <a href="mailto:orders@campusbake.example">orders@campusbake.example</a>
+        </p>
+        <p>&copy; 2026 CampusBake&reg;. All rights reserved.</p>
+
+    </div>
+
+    <!-- ==================================================================
+         TESTING OBSERVATIONS (from the lab instructions)
+         ==================================================================
+         1. Pressing "Place order" with every field empty: the browser
+            blocks the submission and points at the name field with
+            "Please fill out this field", because it is the first
+            required control and it also has the autofocus attribute.
+            Nothing is sent to order.php.
+
+         2. Typing "myemail" in the e-mail field and submitting: the
+            browser refuses with "Please include an '@' in the e-mail
+            address" - type="email" makes the browser check the format
+            before anything is submitted.
+
+         3. 2 cupcakes + 1 slice shows 11 in the output, because
+            (2 * 3) + (1 * 5) = 11. The output updates on every
+            keystroke thanks to the form's oninput attribute.
+         ================================================================== -->
+
+</body>
+</html>

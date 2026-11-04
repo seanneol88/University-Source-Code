@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The HTML5 output Element</title>
+</head>
+<body>
+
+    <!-- The <output> element displays the result of a calculation.
+         oninput on the <form> runs a tiny script every time a value
+         changes, adding the two inputs together.
+         The slider uses min / max / step / value:
+           min   = smallest possible slider value
+           max   = largest possible slider value
+           step  = how much the slider jumps each move
+           value = the starting position
+         The output's for attribute lists the ids that take part
+         in the calculation -->
+
+    <h1>Live Addition Machine</h1>
+    <form oninput="result.value = parseInt(slider.value) + parseInt(extra.value)">
+        <input id="slider" type="range" min="0" max="10" step="1" value="0"> 0
+        <br>
+        +
+        <input id="extra" type="number" value="10">
+        <br>
+        =
+        <output name="result" for="slider extra"></output>
+    </form>
+
+    <!-- Drag the slider or change the number: the result updates
+         instantly, no submit button needed -->
+
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f","spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>

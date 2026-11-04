@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML5 Input Types</title>
+</head>
+<body>
+
+    <!-- A tour of the new HTML5 input types. Each one tells the
+         browser WHICH kind of data to expect, so the browser can
+         show the right picker (calendar, colour swatch, etc.) -->
+    <h1>HTML5 Input Elements</h1>
+    <form>
+
+        <label for="favcolor">Pick your favourite colour:</label>
+        <input type="color" id="favcolor" name="favcolor"><br>
+
+        <label for="searchbox">Search:</label>
+        <input type="search" id="searchbox" name="searchbox"><br>
+
+        <label for="day">Date:</label>
+        <input type="date" id="day" name="day"><br>
+
+        <label for="clock">Time:</label>
+        <input type="time" id="clock" name="clock"><br>
+
+        <label for="monthyear">Month and year:</label>
+        <input type="month" id="monthyear" name="monthyear"><br>
+
+        <label for="site">Website:</label>
+        <input type="url" id="site" name="site" placeholder="https://"><br>
+
+        <label for="whichweek">Week:</label>
+        <input type="week" id="whichweek" name="whichweek"><br>
+
+        <label for="usermail">Email:</label>
+        <input type="email" id="usermail" name="usermail"><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <!-- Experiment: type an invalid value into the Website or Email
+         box (e.g. just "hello") and press Submit. HTML5 checks the
+         format for you before the form is sent -->
+
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f","spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>

@@ -30,6 +30,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          # full history, so the README commit below is a normal child commit
+          # of the branch tip instead of a disconnected root commit
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v7
@@ -51,9 +55,16 @@ jobs:
           git add -- README.md '*/README.md'
           if git diff --cached --quiet; then
             echo "READMEs already up to date"
-          else
-            git commit -m "docs: refresh auto-generated README index [skip ci]"
+            exit 0
+          fi
+          git commit -m "docs: refresh auto-generated README index [skip ci]"
+          # main may have moved while this job ran; rebase instead of failing the push
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME:-main}" || true
+          if git rev-list --count HEAD >/dev/null && git log --oneline -1 --format=%P | grep -q .; then
             git push
+          else
+            echo "::error::refusing to push a commit without a parent"
+            exit 1
           fi
 
       - name: Check whether GitHub Pages is enabled

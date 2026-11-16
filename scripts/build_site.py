@@ -147,11 +147,47 @@ def render_markdown(text: str) -> str:
     )
 
 
+def _table_cells(line: str) -> list[str]:
+    return [c.strip() for c in line.strip().strip("|").split("|")]
+
+
+def _is_table_separator(line: str) -> bool:
+    cells = _table_cells(line)
+    return bool(cells) and all(re.fullmatch(r":?-{2,}:?", c) for c in cells)
+
+
 def _fallback_markdown(text: str) -> str:
     out: list[str] = []
     in_code = False
     in_list = False
-    for line in text.splitlines():
+    lines = text.splitlines()
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        # pipe tables: header row, separator row, then body rows
+        if ("|" in line and not in_code and i + 1 < len(lines)
+                and _is_table_separator(lines[i + 1])):
+            header = _table_cells(line)
+            align = ["right" if c.endswith(":") and not c.startswith(":") else
+                     "center" if c.startswith(":") and c.endswith(":") else "left"
+                     for c in _table_cells(lines[i + 1])]
+            if in_list:
+                out.append("</ul>")
+                in_list = False
+            rows = ['<table>', "<thead><tr>" +
+                    "".join(f'<th style="text-align:{a}">{_inline(h)}</th>'
+                            for h, a in zip(header, align)) + "</tr></thead>", "<tbody>"]
+            i += 2
+            while i < len(lines) and "|" in lines[i] and lines[i].strip():
+                cells = _table_cells(lines[i])
+                rows.append("<tr>" + "".join(
+                    f'<td style="text-align:{a}">{_inline(c)}</td>'
+                    for c, a in zip(cells, align)) + "</tr>")
+                i += 1
+            rows.append("</tbody></table>")
+            out.append("\n".join(rows))
+            continue
+        i += 1
         if line.startswith("```"):
             if in_list:
                 out.append("</ul>")
@@ -839,14 +875,18 @@ class SiteBuilder:
         lines = source.splitlines()
         lang = HIGHLIGHT_CLASS.get(full.suffix.lower(), "plaintext")
         gutter = "\n".join(str(i + 1) for i in range(len(lines)))
-        depth = 2          # labs/<slug>/<file>.html is two levels below the site root
         rel_href = rel.as_posix()
+        # reader pages live at labs/<slug>/<subdirs>/<file>.html, so the depth
+        # depends on how deeply the source file is nested inside the project
+        up_to_project = "../" * len(rel.parent.parts)      # back to the project page
+        depth = 2 + len(rel.parent.parts)                  # back to the site root
         preview = ""
         if full.suffix.lower() == ".html":
-            preview = f'<a class="btn" href="{esc(rel_href)}" target="_blank" rel="noopener">Live preview ↗</a>'
+            preview = (f'<a class="btn" href="{esc(quote(rel.name))}" target="_blank" '
+                       f'rel="noopener">Live preview ↗</a>')
 
-        body = f"""<div class="crumbs"><a href="../../index.html">Home</a> /
-  <a href="index.html">{esc(project.name)}</a> / {esc(rel_href)}</div>
+        body = f"""<div class="crumbs"><a href="{"../" * depth}index.html">Home</a> /
+  <a href="{up_to_project}index.html">{esc(project.name)}</a> / {esc(rel_href)}</div>
 <section class="page-head">
   <div class="codehead">
     <span class="fname">{esc(rel_href)}</span>
@@ -854,7 +894,7 @@ class SiteBuilder:
     <span class="tag lang">{esc(LANGUAGE_NAMES.get(full.suffix.lower(), 'file'))}</span>
   </div>
   <div class="btnrow">
-    <a class="btn" href="index.html">← Back to {esc(project.name)}</a>
+    <a class="btn" href="{up_to_project}index.html">← Back to {esc(project.name)}</a>
     <a class="btn" href="{repo_url()}/blob/main/{quote(project.name)}/{quote(rel_href)}">View on GitHub ↗</a>
     {preview}
   </div>

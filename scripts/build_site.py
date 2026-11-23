@@ -309,7 +309,10 @@ class Project:
             (p for p in path.rglob("*")
              if p.is_file()
              and not any(part in SKIP_DIRS for part in p.relative_to(path).parts)),
-            key=lambda p: (len(p.relative_to(path).parts), p.name.lower()),
+            # group by folder (root files first), then alphabetically inside each
+            key=lambda p: ((0,) if len(p.relative_to(path).parts) == 1 else
+                           (1,) + tuple(x.lower() for x in p.relative_to(path).parts[:-1]),
+                           p.name.lower()),
         )
         self.readme = path / "README.md"
 

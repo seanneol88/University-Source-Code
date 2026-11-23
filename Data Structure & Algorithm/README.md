@@ -1,16 +1,20 @@
 <!-- AUTO-GENERATED:PROJECT-README -->
 # Data Structure & Algorithm
 
-Java coursework — CharQueue, CircularQueue, QueueExperiment.
+Java coursework — CharQueue, CircularQueue, QueueExperiment, DequeDemo, Factorial ….
 
-**Contents:** 4 file(s) · Java
+**Contents:** 8 file(s) · Java
 
 | File | Type | Lines |
 | --- | --- | --- |
-| `README.md` | Markdown | 20 |
+| `README.md` | Markdown | 24 |
 | `Lab 4/CharQueue.java` | Java | 73 |
 | `Lab 4/CircularQueue.java` | Java | 94 |
 | `Lab 4/QueueExperiment.java` | Java | 50 |
+| `Lab 5/DequeDemo.java` | Java | 30 |
+| `Lab 5/Factorial.java` | Java | 28 |
+| `Lab 5/LinkedListQExperiment.java` | Java | 28 |
+| `Lab 5/LinkedListQueue.java` | Java | 97 |
 
 ---
 

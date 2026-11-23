@@ -32,7 +32,7 @@ A web-development lab containing HTML pages and related project assets.
 
 | Project | What it is | Files | Languages |
 | --- | --- | --- | --- |
-| [Data Structure & Algorithm](https://seanneol88.github.io/University-Source-Code/labs/data-structure-algorithm/) | Java coursework — CharQueue, CircularQueue, QueueExperiment. | 4 | Java |
+| [Data Structure & Algorithm](https://seanneol88.github.io/University-Source-Code/labs/data-structure-algorithm/) | Java coursework — CharQueue, CircularQueue, QueueExperiment, DequeDemo, Factorial …. | 8 | Java |
 | [Data Structure Lab 1](https://seanneol88.github.io/University-Source-Code/labs/data-structure-lab-1/) | Java coursework — Linklist, LinkListTest, Node. | 7 | Java |
 | [Data Structure Lab 2](https://seanneol88.github.io/University-Source-Code/labs/data-structure-lab-2/) | Java coursework — MyLinkedList, Node, TestLinkedList. | 4 | Java |
 | [Data Structure Lab 3_Seanneol Ebneazer Anan_S79146](https://seanneol88.github.io/University-Source-Code/labs/data-structure-lab-3-seanneol-ebneazer-anan-s79146/) | This folder contains my Java source code for Lab 3: Stack (Lab manual version 2, 2026/2027). The manual copy I worked from is titled "Lab03-Stack w… | 4 | Java |
